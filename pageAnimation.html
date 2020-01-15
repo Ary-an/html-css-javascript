@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(to left, #ba7453, #d1a984);
+        z-index: -1;
+      }
+
+      nav {
+        display: grid;
+        grid-template-columns: 10% 1fr 1fr 10%;
+        min-height: 10vh;
+        color: white;
+        align-items: center;
+      }
+
+      #logo {
+        grid-column: 2/3;
+        font-size: 24px;
+      }
+
+      .hamburger {
+        justify-self: end;
+      }
+
+      section {
+        display: flex;
+        height: 80vh;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero {
+        width: 80%;
+        height: 100%;
+        position: relative;
+      }
+
+      .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .headline {
+        position: absolute;
+        top: 70%;
+        left: 10%;
+        font-size: 100px;
+        transform: translate(-20%, -70%);
+        color: white;
+        z-index: 3;
+      }
+
+      .hero::after {
+        content: "";
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h3 id="logo">Dream Vacation</h3>
+        <img class="hamburger" src="" alt="hamburger" />
+      </nav>
+
+      <section>
+        <div class="hero">
+          <img
+            src="https://c.wallhere.com/photos/63/95/sunset_cars_car_sunrise_photography_desert_automotive_exotic-870322.jpg!d"
+            alt=""
+          />
+          <h1 class="headline">Dream Car</h1>
+        </div>
+      </section>
+    </header>
+
+    <div class="slider"></div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"
+      integrity="sha256-qGOnfp7iY6DsnB55K7M+0PZjWCtzafRyJh33tgQJkMQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TimelineMax.min.js"
+      integrity="sha256-UJoqRMiZ86QgG17Pw8Dy4XoUyGg8JuBAxH8YC8qTjcQ="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const hero = document.querySelector(".hero");
+      const slider = document.querySelector(".slider");
+      const logo = document.querySelector("#logo");
+      const hamburger = document.querySelector(".hamburger");
+      const headline = document.querySelector(".headline");
+
+      const t1 = new TimelineMax();
+      t1.fromTo(
+        hero,
+        1,
+        { height: "0%" },
+        { height: "80%", ease: Power2.easeInOut }
+      )
+        .fromTo(
+          hero,
+          1.2,
+          { width: "100%" },
+          { width: "80%", ease: Power2.easeInOut }
+        )
+        .fromTo(
+          slider,
+          1.2,
+          { x: "-100%" },
+          { x: "0%", ease: Power2.easeInOut },
+          "-=1.2"
+        )
+        .fromTo(logo, 0.5, { opacity: 0, x: 30 }, { opacity: 1, x: 0 }, "-=0.5")
+        .fromTo(
+          (g = hamburger),
+          0.5,
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0 },
+          "-=1"
+        );
+    </script>
+  </body>
+</html>
